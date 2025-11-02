@@ -7,7 +7,7 @@ import WorkoutPlan from "@/components/plan-display/WorkoutPlan";
 import DietPlan from "@/components/plan-display/DietPlan";
 import TipsAndMotivation from "@/components/plan-display/TipsAndMotivation";
 import SavedPlans from "@/components/SavedPlans";
-import VoicePlayer from "@/components/VoicePlayer";
+import VoicePlayerElevenLabs from "@/components/VoicePlayerElevenLabs";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { UserDetails } from "@/types/user";
 import { FitnessPlan } from "@/types/plan";
@@ -53,14 +53,11 @@ export default function Home() {
 
       const plan: FitnessPlan = await response.json();
       
-      // Save plan to local storage
       savePlan(plan, formData);
       
       setFitnessPlan(plan);
       setAppState("plan");
-      
-      // Show success message
-      setError("✅ Plan saved successfully!");
+      setError("Plan saved successfully!");
       setTimeout(() => setError(null), 3000);
     } catch (err) {
       console.error("Error generating plan:", err);
@@ -213,8 +210,8 @@ export default function Home() {
               </div>
             </motion.div>
 
-            {/* Voice Player */}
-            <VoicePlayer
+            {/* Voice Player - ElevenLabs */}
+            <VoicePlayerElevenLabs
               workoutText={getWorkoutText(fitnessPlan)}
               dietText={getDietText(fitnessPlan)}
               tipsText={getTipsText(fitnessPlan)}
